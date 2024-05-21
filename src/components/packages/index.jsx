@@ -63,7 +63,7 @@ const PackageList = () => {
           {singleCountry?.name}
         </h3>
       </div>
-      <div className="md:w-[70%] w-full mx-auto my-10">
+      <div className="2xl:max-w-[70%]  xl:max-w-[75%] lg:max-w-[90%] w-full mx-auto my-10">
         <PackageFilterable setPackageType={setPackageType} />
       </div>
       <div className="md:block hidden">

@@ -10,7 +10,7 @@ const CountryFilter = ({ selectedLetters, setSelectedLetters }) => {
         <br className="lg:block hidden" /> Connect to the internet in minutes in
         more than 197 destinations around the world.
       </h5>
-      <div className="lg:flex justify-center items-center gap-6  lg:bg-slate-700 lg:border lg:w-[60%]  mx-auto w-full lg:p-2 rounded-full text-white">
+      <div className="lg:flex justify-center items-center gap-6 relative  lg:bg-slate-700 lg:border lg:w-[60%]  mx-auto w-full lg:p-2 rounded-full text-white">
         <CountrySearchComponent />
       </div>
       <div className="text-white flex lg:gap-5 flex-wrap justify-center mt-5 lg:px-10">

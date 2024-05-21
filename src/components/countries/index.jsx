@@ -4,7 +4,6 @@ import CountryFilter from "./CountryFilter";
 import { CountryContext } from "../../contexts/CountryProvider";
 import { letters } from "../../constants/countryFilter";
 
-
 const CountryList = () => {
   const [selectedLetters, setSelectedLetters] = useState("");
   const { countries } = useContext(CountryContext);

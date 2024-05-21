@@ -70,14 +70,26 @@ const PackageCard = ({ packageType, pack, country }) => {
           </div>
         </div>
 
-        <div className="flex items-center flex-wrap justify-between">
-          {pack?.facilities?.map((item) => (
-            <div className="flex items-center gap-1">
-              <IoMdCheckmark className="text-[#C09D5E] font-bold" />
-              <span className="text-[#DFDFDF]">{item}</span>
-            </div>
-          ))}
-        </div>
+        {pack.facilities ? (
+          <div className="flex items-center flex-wrap justify-between">
+            {pack?.facilities?.map((item) => (
+              <div className="flex items-center gap-1">
+                <IoMdCheckmark className="text-[#C09D5E] font-bold" />
+                <span className="text-[#DFDFDF]">{item}</span>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="flex items-center flex-wrap justify-between">
+            {["Data Only", "No Contracts", "No SIM Cards"].map((item) => (
+              <div className="flex items-center gap-1">
+                <IoMdCheckmark className="text-[#C09D5E] font-bold" />
+                <span className="text-[#DFDFDF]">{item}</span>
+              </div>
+            ))}
+          </div>
+        )}
+
         <div>
           <button className="border-2 w-full rounded-full py-2">Buy Now</button>
         </div>
