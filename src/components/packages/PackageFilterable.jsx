@@ -20,6 +20,7 @@ const PackageFilterable = ({ setPackageType }) => {
 
   return (
     <>
+      {/* larger devices  */}
       <div className="lg:block hidden">
         <div className="text-white text-base font-medium flex justify-between gap-3 bg-[#69645E] border border-[#927148] rounded-full p-2">
           {packages.map((pkg) => (
@@ -34,6 +35,7 @@ const PackageFilterable = ({ setPackageType }) => {
           ))}
         </div>
       </div>
+      {/* smaller devices  */}
       <div className="lg:hidden block relative">
         <div className="text-white text-base  flex justify-between gap-3 bg-[#69645E] border border-[#927148] rounded-full p-1">
           <button
