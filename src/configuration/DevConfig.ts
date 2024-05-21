@@ -1,0 +1,9 @@
+/* eslint-disable import/no-anonymous-default-export */
+export default {
+  DOMAIN: process.env.NEXT_PUBLIC_DOMAIN_DEV,
+  API_BASE_URL: process.env.NEXT_PUBLIC_API_BASE_URL_DEV,
+  GOOGLE_CLIENT_ID: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID_DEV,
+  GOOGLE_CLIENT_SECRET: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET_DEV,
+  PAYPAL_CLIENT_ID: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID_DEV,
+  PAYPAL_SECRET_CODE: process.env.NEXT_PUBLIC_PAYPAL_SECRET_CODE_DEV,
+};
