@@ -5,8 +5,12 @@ import { BiSolidCalendar } from "react-icons/bi";
 import { IoIosPricetag } from "react-icons/io";
 import { IoMdCheckmark } from "react-icons/io";
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 const PackageCard = ({ packageType, pack, country }) => {
+  const router = useRouter();
+  console.log(router);
   return (
     <div
       className={`text-white
@@ -14,7 +18,12 @@ const PackageCard = ({ packageType, pack, country }) => {
     >
       <div className="overflow-hidden h-[80px] relative">
         <h4 className="absolute z-50 p-4 text-2xl font-medium">
-          {packageType} Pack
+          {pack?.dataAmount < 0 ? (
+            <span>Unlimited </span>
+          ) : (
+            <span>{pack?.dataAmount / 1000} GB </span>
+          )}
+          {pack?.duration} Days
         </h4>
         <Image
           src={bannerBgImage}
@@ -46,7 +55,11 @@ const PackageCard = ({ packageType, pack, country }) => {
             <span>Data</span>
           </div>
           <div className="flex items-center gap-2 font-medium">
-            <span>{pack?.dataAmount / 1000} GB </span>
+            {pack?.dataAmount < 0 ? (
+              <span>Unlimited </span>
+            ) : (
+              <span>{pack?.dataAmount / 1000} GB </span>
+            )}
           </div>
         </div>
 
@@ -91,7 +104,11 @@ const PackageCard = ({ packageType, pack, country }) => {
         )}
 
         <div>
-          <button className="border-2 w-full rounded-full py-2">Buy Now</button>
+          <Link href={"/"}>
+            <button className="border-2 w-full rounded-full py-2">
+              Buy Now
+            </button>
+          </Link>
         </div>
       </div>
     </div>
