@@ -23,8 +23,6 @@ const CountryProvider = ({ children }) => {
     loadMetaData();
   }, []);
 
-  console.log({ countries });
-
   return (
     <CountryContext.Provider
       value={{ countries, setCountries, loading, setLoading }}
