@@ -17,5 +17,3 @@ const getConfig = () => {
 
 export const CONFIG: { [key in keyof typeof DevConfig]: any } =
   getConfig() as any;
-
-console.log({ CONFIG });

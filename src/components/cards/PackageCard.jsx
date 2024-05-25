@@ -7,15 +7,15 @@ import { IoMdCheckmark } from "react-icons/io";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useCurrency } from "../../contexts/CurrencyProvider";
+import { convertPrice } from "../../utils/convertPrice";
 
-const PackageCard = ({ packageType, pack, country }) => {
+const PackageCard = ({ pack, country }) => {
   const router = useRouter();
-  console.log(router);
+  const { currency } = useCurrency();
+
   return (
-    <div
-      className={`text-white
-      } border-slate-500 rounded-lg lg:mr-0 mr-3 bg-[#454545]`}
-    >
+    <div className="text-white border-slate-500 rounded-lg lg:mr-0 mr-3 bg-[#454545]">
       <div className="overflow-hidden h-[80px] relative">
         <h4 className="absolute z-50 p-4 text-2xl font-medium">
           {pack?.dataAmount < 0 ? (
@@ -79,14 +79,14 @@ const PackageCard = ({ packageType, pack, country }) => {
             <span>Price</span>
           </div>
           <div className="font-medium">
-            <span>US ${pack?.salePrice}</span>
+            <span>{convertPrice(pack?.salePrice, currency)}</span>
           </div>
         </div>
 
         {pack.facilities ? (
           <div className="flex items-center flex-wrap justify-between">
-            {pack?.facilities?.map((item) => (
-              <div className="flex items-center gap-1">
+            {pack?.facilities?.map((item, index) => (
+              <div className="flex items-center gap-1" key={index}>
                 <IoMdCheckmark className="text-[#C09D5E] font-bold" />
                 <span className="text-[#DFDFDF]">{item}</span>
               </div>
@@ -94,12 +94,14 @@ const PackageCard = ({ packageType, pack, country }) => {
           </div>
         ) : (
           <div className="flex items-center flex-wrap justify-between">
-            {["Data Only", "No Contracts", "No SIM Cards"].map((item) => (
-              <div className="flex items-center gap-1">
-                <IoMdCheckmark className="text-[#C09D5E] font-bold" />
-                <span className="text-[#DFDFDF]">{item}</span>
-              </div>
-            ))}
+            {["Data Only", "No Contracts", "No SIM Cards"].map(
+              (item, index) => (
+                <div className="flex items-center gap-1" key={index}>
+                  <IoMdCheckmark className="text-[#C09D5E] font-bold" />
+                  <span className="text-[#DFDFDF]">{item}</span>
+                </div>
+              )
+            )}
           </div>
         )}
 

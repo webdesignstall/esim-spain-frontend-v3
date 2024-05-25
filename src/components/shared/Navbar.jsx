@@ -1,10 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import logo from "../../assets/pirateLogo.svg";
 import bars from "../../assets/icons/NavBars.svg";
 import Link from "next/link";
 import Image from "next/image";
 import { FaUser, FaAngleDown } from "react-icons/fa";
 import { LiaFlagUsaSolid } from "react-icons/lia";
+import { useCurrency } from "../../contexts/CurrencyProvider";
 
 const items = [
   {
@@ -38,8 +39,10 @@ const Navbar = () => {
   const [selectedCountry, setSelectedCountry] = useState(items[0]);
   const [dropdown, setDropdown] = useState(false);
   const [showMenuItem, setShowMenuItem] = useState(false);
+  const { setCurrency } = useCurrency();
 
   const handleSelectCountry = (country) => {
+    setCurrency(country.label);
     setSelectedCountry(country);
     setDropdown(false);
   };
