@@ -48,40 +48,40 @@ const CountrySearchComponent = () => {
           onChange={(e) => setSearchValue(e.target.value)}
           onFocus={() => setShowDropDown(true)}
           id="search"
-          className="bg-slate-700 w-full text-white lg:mx-3 lg:p-2 px-4 py-2 mb-3 lg:mb-0 lg:rounded-md rounded-full lg:border-0"
+          className="bg-slate-700 w-full text-white border-0 outline-none lg:mx-3 lg:p-2 px-4 py-2 mb-3 lg:mb-0 lg:rounded-md rounded-full lg:border-0"
         />
         {showDropDown && (
           <div
             ref={dropdownRef}
-            className="absolute bg-white z-50 w-full flex flex-col gap-3 rounded-lg h-96 overflow-y-scroll top-12 left-3 text-black"
+            className="absolute bg-gray-300 z-50 w-full flex flex-col gap-3 rounded-lg h-96 overflow-y-scroll top-12 left-3 text-black"
           >
             {filteredCountries.length > 0
               ? filteredCountries.map((country) => (
                   <div
                     onClick={() => handleSelectCountry(country)}
-                    className="flex items-center gap-4 cursor-pointer hover:bg-gray-300 p-3"
+                    className="flex items-center gap-4 cursor-pointer hover:bg-gray-200 p-3"
                     key={country?.id}
                   >
                     <img
-                      className="w-20 h-12 rounded-lg"
+                      className="w-10 h-6 rounded-md"
                       src={`data:image/png;base64,${country?.flag}`}
                       alt="country flag"
                     />
-                    <h4 className="text-2xl font-semibold">{country?.name}</h4>
+                    <h4 className="text-md font-semibold">{country?.name}</h4>
                   </div>
                 ))
               : countries?.map((country) => (
                   <div
                     onClick={() => handleSelectCountry(country)}
-                    className="flex items-center gap-4 cursor-pointer hover:bg-gray-300 p-3"
+                    className="flex items-center gap-4 cursor-pointer hover:bg-gray-200 p-3"
                     key={country?.id}
                   >
                     <img
-                      className="w-20 h-12 rounded-lg"
+                      className="w-10 h-6 rounded-md"
                       src={`data:image/png;base64,${country?.flag}`}
                       alt="country flag"
                     />
-                    <h4 className="text-2xl font-semibold">{country?.name}</h4>
+                    <h4 className="text-md font-semibold">{country?.name}</h4>
                   </div>
                 ))}
           </div>

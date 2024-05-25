@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import PackageFilterable from "./PackageFilterable";
 import PackageCard from "../cards/PackageCard";
-import Link from "next/link";
 import PackageCardSlider from "../cards/PackageCardSlider";
 import { convertBase64ToImgSource } from "../../common/utils/image";
 import { useRouter } from "next/router";
@@ -14,7 +13,30 @@ const PackageList = () => {
   const [loading, setLoading] = useState(false);
   const [singleCountry, setSingleCountry] = useState({});
   const [packages, setPackages] = useState([]);
+  const [filterPackages, setFilterPackages] = useState([]);
   const router = useRouter();
+
+  useEffect(() => {
+    if (packageType === "Daily") {
+      const packs = packages.filter((pack) => pack?.duration === 1);
+      setFilterPackages(packs);
+    } else if (packageType === "Weekly") {
+      const packs = packages.filter((pack) => pack?.duration === 7);
+      setFilterPackages(packs);
+    } else if (packageType === "Monthly") {
+      const packs = packages.filter((pack) => pack?.duration === 30);
+      setFilterPackages(packs);
+    } else if (packageType === "Unlimited") {
+      const packs = packages.filter((pack) => pack?.dataAmount < 0);
+      setFilterPackages(packs);
+    } else if (packageType === "All") {
+      setFilterPackages([]);
+    } else {
+      const filterType = Number(packageType.split(" ")[0]);
+      const packs = packages.filter((pack) => pack?.duration === filterType);
+      setFilterPackages(packs);
+    }
+  }, [packageType, packages]);
 
   useEffect(() => {
     if (countries && router?.query?.country) {
@@ -29,7 +51,7 @@ const PackageList = () => {
         setSingleCountry({});
       }
     }
-  }, [router, singleCountry]);
+  }, [router, countries]);
 
   const handleFetchBundles = async (countryCode) => {
     try {
@@ -37,9 +59,8 @@ const PackageList = () => {
       const res = await BundleApi.listBundleFromCountry(countryCode);
       const resBundles = res?.data?.data?.data ?? [];
       setPackages(resBundles);
-      setLoading(false);
     } catch (error) {
-      setLoading(false);
+      console.error(error);
     } finally {
       setLoading(false);
     }
@@ -63,8 +84,11 @@ const PackageList = () => {
           {singleCountry?.name}
         </h3>
       </div>
-      <div className="2xl:max-w-[70%]  xl:max-w-[75%] lg:max-w-[90%] w-full mx-auto my-10">
-        <PackageFilterable setPackageType={setPackageType} />
+      <div className="w-full mx-auto my-10">
+        <PackageFilterable
+          packages={packages}
+          setPackageType={setPackageType}
+        />
       </div>
       <div className="md:block hidden">
         {loading ? (
@@ -79,13 +103,23 @@ const PackageList = () => {
               </h5>
             ) : (
               <div className="grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 my-10 pb-10">
-                {packages?.map((pkg) => (
-                  <PackageCard
-                    pack={pkg}
-                    packageType={packageType}
-                    country={singleCountry}
-                  />
-                ))}
+                {filterPackages.length > 0
+                  ? filterPackages?.map((pkg) => (
+                      <PackageCard
+                        key={pkg.id}
+                        pack={pkg}
+                        packageType={packageType}
+                        country={singleCountry}
+                      />
+                    ))
+                  : packages?.map((pkg) => (
+                      <PackageCard
+                        key={pkg.id}
+                        pack={pkg}
+                        packageType={packageType}
+                        country={singleCountry}
+                      />
+                    ))}
               </div>
             )}
           </>
@@ -94,23 +128,6 @@ const PackageList = () => {
       <div className="md:hidden block">
         <PackageCardSlider packageType={packageType} />
       </div>
-      {packages?.length > 0 ? (
-        <div className="flex justify-center items-center">
-          <Link href={"/countries"}>
-            <button className="bg-[#C09D5E] rounded-full font-medium mb-10 -mt-5 px-6 py-3 flex gap-2 items-center text-white">
-              Explore More Packages
-            </button>
-          </Link>
-        </div>
-      ) : (
-        <div className="flex justify-center items-center">
-          <Link href={"/countries"}>
-            <button className="bg-[#C09D5E] rounded-full font-medium mb-10 -mt-5 px-14 py-3 flex gap-2 items-center text-white">
-              Back
-            </button>
-          </Link>
-        </div>
-      )}
     </div>
   );
 };
