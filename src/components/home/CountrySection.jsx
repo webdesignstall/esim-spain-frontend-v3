@@ -12,7 +12,9 @@ const CountrySection = () => {
       className="2xl:max-w-[80%] lg:max-w-[85%]  mx-auto xl:px-10 lg:py-10 p-5 bg-[#1F1B17] lg:-mt-24 mt-28 lg:rounded-3xl relative"
     >
       <h2 className="lg:text-5xl text-3xl lg:leading-[60px] font-medium text-white text-center py-10 mb-20">
-        Explore Our Range of <br /> Data eSIMs for 190+ Destinations
+        {/* Explore Our Range of <br /> Data eSIMs for 190+ Destinations  */}
+        Millions of People Stay <br /> Connected With Data eSims <br /> for 190+
+        Countries
       </h2>
       <CountryContainer limit={15} />
       <div className="flex justify-center items-center">
