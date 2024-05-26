@@ -1,5 +1,5 @@
-import React from "react";
-import { Button, Form, Input } from "antd";
+import { Form, Input } from "antd";
+import styles from "./checkout.module.css";
 
 const CheckoutForm = () => {
   const onFinish = (values) => {
@@ -11,8 +11,10 @@ const CheckoutForm = () => {
   };
 
   return (
-    <div className="w-full p-6 bg-[#454545] border text-white rounded-lg">
-      <h3 className="text-3xl mb-6 font-bold">Billing Details</h3>
+    <div className="w-full lg:p-6 lg:bg-[#454545] lg:border text-white rounded-lg">
+      <h3 className="lg:text-3xl text-xl lg:text-start text-center mb-6 font-bold">
+        Billing Details
+      </h3>
       <Form
         name="checkout"
         initialValues={{ remember: true }}
@@ -26,8 +28,8 @@ const CheckoutForm = () => {
           className="mb-10"
         >
           <Input
+            className={`${styles.input} bg-[#717171] text-white text-xl focus:text-black hover:text-black outline-none border-0 lg:px-3 lg:py-4 p-2`}
             placeholder="Name*"
-            className="bg-[#717171] text-white text-xl focus:text-black hover:text-black outline-none border-0 px-3 py-4"
           />
         </Form.Item>
         <Form.Item
@@ -36,8 +38,8 @@ const CheckoutForm = () => {
           className="mb-10"
         >
           <Input
+            className={`${styles.input} bg-[#717171] text-white text-xl focus:text-black hover:text-black outline-none border-0 lg:px-3 lg:py-4 p-2`}
             placeholder="Nick Name*"
-            className="bg-[#717171] text-white text-xl focus:text-black hover:text-black outline-none border-0 px-3 py-4"
           />
         </Form.Item>
         <Form.Item
@@ -46,8 +48,8 @@ const CheckoutForm = () => {
           className="mb-10"
         >
           <Input
+            className={`${styles.input} bg-[#717171] text-white text-xl focus:text-black hover:text-black outline-none border-0 lg:px-3 lg:py-4 p-2`}
             placeholder="Email*"
-            className="bg-[#717171] text-white text-xl focus:text-black hover:text-black outline-none border-0 px-3 py-4"
           />
         </Form.Item>
         <Form.Item
@@ -58,8 +60,8 @@ const CheckoutForm = () => {
           className="mb-10"
         >
           <Input
+            className={`${styles.input} bg-[#717171] text-white text-xl focus:text-black hover:text-black outline-none border-0 lg:px-3 lg:py-4 p-2`}
             placeholder="Phone No."
-            className="bg-[#717171] text-white text-xl focus:text-black hover:text-black outline-none border-0 px-3 py-4"
           />
         </Form.Item>
         <Form.Item
@@ -68,8 +70,8 @@ const CheckoutForm = () => {
           className="mb-10"
         >
           <Input
+            className={`${styles.input} bg-[#717171] text-white text-xl focus:text-black hover:text-black outline-none border-0 lg:px-3 lg:py-4 p-2`}
             placeholder="Country:"
-            className="bg-[#717171] text-white text-xl focus:text-black hover:text-black outline-none border-0 px-3 py-4"
           />
         </Form.Item>
         <Form.Item
@@ -78,8 +80,8 @@ const CheckoutForm = () => {
           className="mb-10"
         >
           <Input
+            className={`${styles.input} bg-[#717171] text-white text-xl focus:text-black hover:text-black outline-none border-0 lg:px-3 lg:py-4 p-2`}
             placeholder="Address:"
-            className="bg-[#717171] text-white text-xl focus:text-black hover:text-black outline-none border-0 px-3 py-4"
           />
         </Form.Item>
         <Form.Item
@@ -88,8 +90,8 @@ const CheckoutForm = () => {
           className="mb-10"
         >
           <Input
+            className={`${styles.input} bg-[#717171] text-white text-xl focus:text-black hover:text-black outline-none border-0 lg:px-3 lg:py-4 p-2`}
             placeholder="Zip Code:"
-            className="bg-[#717171] text-white text-xl focus:text-black hover:text-black outline-none border-0 px-3 py-4"
           />
         </Form.Item>
         <Form.Item
@@ -98,12 +100,12 @@ const CheckoutForm = () => {
           className="mb-10"
         >
           <Input.TextArea
+            className={`${styles.input} bg-[#717171] text-white text-xl focus:text-black hover:text-black outline-none border-0 lg:px-3 lg:py-4 p-2`}
             placeholder="Note of order:"
-            className="bg-[#717171] text-white text-xl focus:text-black hover:text-black outline-none border-0 px-3 py-4"
           />
         </Form.Item>
-        <Form.Item className="w-1/2 mx-auto">
-          <button className="border-2 border-[#FFFFFF]  rounded-full w-full font-medium  text-center py-5 text-white">
+        <Form.Item className="lg:w-1/2 w-full mx-auto">
+          <button className="border-2 border-[#FFFFFF] rounded-full w-full font-medium text-center lg:py-5 py-3 text-white">
             Continue Shopping
           </button>
         </Form.Item>
