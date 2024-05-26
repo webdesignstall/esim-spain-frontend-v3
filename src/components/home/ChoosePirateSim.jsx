@@ -52,7 +52,7 @@ const ChoosePirateSim = () => {
             }
           />
           <div className="lg:block hidden absolute top-0 right-[45%]">
-            <Image className="h-32 w-32" src={logo} />
+            <Image className="h-32 w-32" src={logo} alt="logo image" />
           </div>
         </div>
       </div>

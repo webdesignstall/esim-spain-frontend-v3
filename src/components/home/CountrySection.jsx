@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 import CountryContainer from "../containers/CountryContainer";
 
-const CountrySection = () => {
+const CountrySection = ({ countries }) => {
   return (
     <div
       style={{
@@ -16,7 +16,7 @@ const CountrySection = () => {
         Millions of People Stay <br /> Connected With Data eSims <br /> for 190+
         Countries
       </h2>
-      <CountryContainer limit={15} />
+      <CountryContainer countries={countries} limit={15} />
       <div className="flex justify-center items-center">
         <Link href={"/countries"}>
           <button className="bg-[#C09D5E] rounded-full font-medium mb-10 -mt-5 px-6 py-3 flex gap-2 items-center text-white">

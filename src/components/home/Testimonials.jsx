@@ -48,7 +48,7 @@ const Testimonials = () => {
                     <img
                       className="w-16 h-16 rounded-full"
                       src={item.user.profileImage}
-                      alt={item.user.name}
+                      alt={item.user.name || "user avatar"}
                     />
                   ) : (
                     <FaUser className="w-11 h-11 text-white rounded-full" />
@@ -82,7 +82,7 @@ const Testimonials = () => {
                 <img
                   className="w-16 h-16 rounded-full"
                   src={largestReview.user.profileImage}
-                  alt={largestReview.user.name}
+                  alt={largestReview.user.name || "user avatar"}
                 />
               ) : (
                 <FaUser className="w-11 h-11 text-white rounded-full" />
@@ -121,7 +121,7 @@ const Testimonials = () => {
                     <img
                       className="w-16 h-16 rounded-full"
                       src={item.user.profileImage}
-                      alt={item.user.name}
+                      alt={item.user.name || "user avatar"}
                     />
                   ) : (
                     <FaUser className="w-11 h-11 text-white rounded-full" />

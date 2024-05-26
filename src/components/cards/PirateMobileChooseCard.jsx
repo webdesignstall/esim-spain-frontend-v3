@@ -8,7 +8,7 @@ const PirateMobileChooseCard = ({ icon, title, subTitle, dangerousWidth }) => {
         <Image
           className="absolute bottom-0 top-6 -right-4"
           src={icon}
-          alt={title}
+          alt={title || "card image"}
         />
       </div>
       <div
