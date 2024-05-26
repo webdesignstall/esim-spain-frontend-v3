@@ -1,12 +1,10 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import CountryContainer from "../containers/CountryContainer";
 import CountryFilter from "./CountryFilter";
-import { CountryContext } from "../../contexts/CountryProvider";
 import { letters } from "../../constants/countryFilter";
 
-const CountryList = () => {
+const CountryList = ({ countries }) => {
   const [selectedLetters, setSelectedLetters] = useState("");
-  const { countries } = useContext(CountryContext);
   const [filteredCountries, setFilteredCountries] = useState([]);
 
   useEffect(() => {
@@ -34,7 +32,10 @@ const CountryList = () => {
         selectedLetters={selectedLetters}
         setSelectedLetters={setSelectedLetters}
       />
-      <CountryContainer filteredCountries={filteredCountries} />
+      <CountryContainer
+        countries={countries}
+        filteredCountries={filteredCountries}
+      />
     </div>
   );
 };

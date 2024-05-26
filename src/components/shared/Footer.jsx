@@ -71,7 +71,7 @@ const Footer = () => {
             </ul>
           </div>
           <div className="my-5">
-            <Image src={paymentMethods} alt="" />
+            <Image src={paymentMethods} alt="payment methods images" />
           </div>
         </div>
       </div>
