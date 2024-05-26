@@ -16,8 +16,6 @@ const PackageList = () => {
   const [filterPackages, setFilterPackages] = useState([]);
   const router = useRouter();
 
-  console.log({ packages });
-
   useEffect(() => {
     if (packageType === "Daily") {
       const packs = packages.filter((pack) => pack?.duration === 1);

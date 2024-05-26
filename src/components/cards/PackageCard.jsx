@@ -106,7 +106,11 @@ const PackageCard = ({ pack, country }) => {
         )}
 
         <div>
-          <Link href={"/"}>
+          <Link
+            href={`/checkout/${country?.name?.toLowerCase()}/${
+              pack.name
+            }?countryCode=${country?.iso}`}
+          >
             <button className="border-2 w-full rounded-full py-2">
               Buy Now
             </button>

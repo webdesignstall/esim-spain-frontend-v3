@@ -51,7 +51,9 @@ const Navbar = () => {
     <nav className="lg:flex justify-between items-center text-white 2xl:px-20 px-3 py-4">
       {/* Desktop design  */}
       <div className="lg:block hidden">
-        <Image src={logo} alt="Logo" />
+        <Link href={"/"}>
+          <Image src={logo} alt="Logo" />
+        </Link>
       </div>
       <div className="lg:block hidden">
         <ul className="flex items-center gap-5 font-normal text-[18px]">
