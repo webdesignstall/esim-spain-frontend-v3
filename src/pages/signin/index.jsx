@@ -1,4 +1,5 @@
 import SignInPage from "@/components/auth/signin";
+import AuthLayout from "../../components/layouts/AuthLayout";
 
 const Signin = () => {
   return (
@@ -9,3 +10,7 @@ const Signin = () => {
 };
 
 export default Signin;
+
+Signin.getLayout = function (page) {
+  return <AuthLayout>{page}</AuthLayout>;
+};

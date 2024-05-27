@@ -1,43 +1,59 @@
 import Image from "next/image";
-import loginImage from "../../../assets/images/signinBgImage.png";
 import Link from "next/link";
 import { BsThreeDots } from "react-icons/bs";
-import { Button, Checkbox, Form, Input } from "antd";
-import SocialSignIn from "../socials";
+import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import loginImage from "../../../assets/images/signinBgImage.png";
+import logo from "../../../assets/pirateLogo.svg";
 import GoogleSignIn from "../socials/GoogleSignIn";
 import FacebookSignIn from "../socials/FacebookSignIn";
 
 const SignInPage = () => {
-  const onFinish = (values) => {
-    console.log("Success:", values);
+  const [toggle, setToggle] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const handleSignIn = (data) => {
+    console.log("Sign In Data:", data);
   };
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
+
   return (
-    <div className="bg-black">
-      <div className="flex justify-between">
-        <div className="w-[53%]">
-          <Image className="w-full" src={loginImage} alt="login image" />
+    <div className="bg-black min-h-screen flex justify-center">
+      <div className="flex w-full justify-center">
+        <div className="w-[53%] relative">
+          <Image
+            className="w-full h-full object-cover"
+            src={loginImage}
+            alt="login image"
+          />
+          <Link href={"/"}>
+            <Image className="absolute top-10 left-10" src={logo} alt="logo" />
+          </Link>
+          <p className="text-white absolute bottom-10 left-10">
+            &copy; {new Date().getFullYear()} , eSIM Powered by Pirate Mobile
+          </p>
         </div>
-        <div className="w-[47%] pr-16">
-          <div className="px-20 py-16">
+        <div className="w-[47%] pr-16 flex flex-col">
+          <div className="2xl:px-20 lg:px-10 py-16">
             <div className="text-white">
               <p className="flex items-center gap-3 justify-end">
                 <span>Don't have an account?</span>
-                <Link className="text-[#C09D5E]" href={"/login"}>
-                  Sign In
+                <Link className="text-[#C09D5E]" href={"/signup"}>
+                  Sign Up
                 </Link>
                 <span className="p-3 border rounded-2xl border-[#C09D5E] bg-[#221f1f] ">
-                  <BsThreeDots className=" text-2xl" />
+                  <BsThreeDots className="text-2xl" />
                 </span>
               </p>
             </div>
             <h4 className="text-4xl mt-20 mb-10 text-white font-semibold">
               Sign In
             </h4>
-            {/* <SocialSignIn /> */}
-            <div className="flex w-full gap-5 items-center justify-between mb-20">
+            <div className="flex w-full gap-5 items-center justify-between mb-12">
               <div className="w-3/5">
                 <GoogleSignIn />
               </div>
@@ -45,12 +61,12 @@ const SignInPage = () => {
                 <FacebookSignIn />
               </div>
             </div>
-            <hr className="w-10 text-[#C0BDCC]" />
+            <hr className="w-10 border-[#C0BDCC]" />
             <p className="text-[#D2D2D2] text-sm mt-5 mb-10">
               Or sign in using your email address
             </p>
-            <form>
-              <div className="flex justify-between gap-10">
+            <form className="w-full" onSubmit={handleSubmit(handleSignIn)}>
+              <div className="flex justify-between gap-4 w-full">
                 <div className="flex flex-col w-full">
                   <label
                     className="text-white text-md font-normal mb-3"
@@ -59,43 +75,81 @@ const SignInPage = () => {
                     Your email
                   </label>
                   <input
-                    className="bg-[#221f1f] text-white text-lg px-5 w-full py-3 rounded-3xl border"
+                    className={`bg-[#221f1f] text-white text-lg px-5 py-3 rounded-3xl border ${
+                      errors.email ? "border-red-500" : "border-[#3D3D3D]"
+                    }`}
                     type="email"
-                    name="email"
-                    id=""
+                    {...register("email", {
+                      required: "Email is required",
+                      pattern: {
+                        value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                        message: "Invalid email address",
+                      },
+                    })}
                     placeholder="youremail@example.com"
                   />
+                  {errors.email && (
+                    <p className="text-red-500 mt-2 text-sm">
+                      {errors.email.message}
+                    </p>
+                  )}
                 </div>
-                <div className="flex flex-col w-full">
+                <div className="flex flex-col w-full ">
                   <label
                     className="text-white text-md font-normal mb-3"
-                    htmlFor="email"
+                    htmlFor="password"
                   >
                     Password
                   </label>
-                  <input
-                    className="bg-[#221f1f] text-white text-lg px-5 w-full py-3 rounded-3xl border"
-                    type="password "
-                    name="password"
-                    id=""
-                    placeholder="**************"
-                  />
+                  <div className="relative w-full">
+                    <input
+                      className={`bg-[#221f1f] text-white text-lg px-5 w-full py-3 rounded-3xl border ${
+                        errors.password ? "border-red-500" : "border-[#3D3D3D]"
+                      }`}
+                      type={toggle ? "text" : "password"}
+                      {...register("password", {
+                        required: "Password is required",
+                        minLength: {
+                          value: 6,
+                          message: "Password must be at least 6 characters",
+                        },
+                      })}
+                      placeholder="********"
+                    />
+                    <button
+                      type="button"
+                      className="text-white absolute bottom-5 text-lg right-3"
+                      onClick={() => setToggle((prev) => !prev)}
+                    >
+                      {toggle ? <AiFillEye /> : <AiFillEyeInvisible />}
+                    </button>
+                  </div>
+                  {errors.password && (
+                    <p className="text-red-500 mt-2 text-sm">
+                      {errors.password.message}
+                    </p>
+                  )}
                 </div>
               </div>
-              <div className="flex  gap-5 mt-5">
-                <input type="checkbox" name="checkbox" id="checkbox" />
-                <label className="text-white" htmlFor="checkbox">
+              <div className="flex gap-5 mt-5 items-center">
+                <input
+                  type="checkbox"
+                  {...register("remember")}
+                  className="text-white"
+                />
+                <label className="text-white" htmlFor="remember">
                   Remember me
                 </label>
-                <Link href={"/forget-password"}>
-                  <span className="text-[#C09D5E] hover:underline">
-                    Forget password
-                  </span>
+                <Link
+                  className="text-[#C09D5E] hover:underline"
+                  href={"/forget-password"}
+                >
+                  Forget password
                 </Link>
               </div>
               <div className="mt-10">
                 <button
-                  type="button"
+                  type="submit"
                   className="text-white font-semibold flex gap-3 items-center bg-[#C09D5E] px-14 rounded-full py-4"
                 >
                   <span>Sign In Now</span>
