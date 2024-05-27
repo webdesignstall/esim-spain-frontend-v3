@@ -51,7 +51,7 @@ const PackageFilterable = ({ setPackageType, packages }) => {
       {/* larger devices  */}
       <div className="lg:block hidden">
         <div className="text-white text-base font-medium flex justify-between gap-3 bg-[#69645E] border border-[#927148] rounded-full p-2">
-          {packagesFilter.map((pkg) => (
+          {packagesFilter?.map((pkg) => (
             <div key={pkg}>
               {pkg === "Custom" ? (
                 <select
@@ -66,7 +66,7 @@ const PackageFilterable = ({ setPackageType, packages }) => {
                   id="filter"
                 >
                   <option value="All">All</option>
-                  {uniqueFiltered.map((pack) => (
+                  {uniqueFiltered?.map((pack) => (
                     <option key={pack?.duration} value={pack?.duration}>
                       {pack?.duration} days
                     </option>

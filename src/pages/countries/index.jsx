@@ -31,5 +31,6 @@ export async function getServerSideProps() {
     return { props: { countries: countryList } };
   } catch (error) {
     console.log(error);
+    return { props: { countries: [] } };
   }
 }
