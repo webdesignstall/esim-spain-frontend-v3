@@ -43,14 +43,14 @@ const PackageCardSlider = ({ packageType }) => {
         }}
         {...settings}
       >
-        {packageData.map((pack, index) => (
+        {packageData?.map((pack, index) => (
           <div key={index} className="mr-3 mb-10 ">
             <PackageCard pack={pack} packageType={packageType} />
           </div>
         ))}
       </Slider>
       <div className="flex justify-center items-center">
-        {packageData.map((_, index) => (
+        {packageData?.map((_, index) => (
           <GoDotFill
             className={
               index === currentSlide ? "text-[#C09D5E]" : "text-[#58534980]"

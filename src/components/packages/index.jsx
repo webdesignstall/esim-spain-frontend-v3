@@ -7,51 +7,58 @@ import { useRouter } from "next/router";
 import { CountryContext } from "../../contexts/CountryProvider";
 import BundleApi from "../../apis/bundle/BundleApi";
 
-const PackageList = () => {
+const PackageList = ({ bundles, countryCode }) => {
   const [packageType, setPackageType] = useState("Daily");
   const { countries } = useContext(CountryContext);
   const [loading, setLoading] = useState(false);
   const [singleCountry, setSingleCountry] = useState({});
-  const [packages, setPackages] = useState([]);
+  const [packages, setPackages] = useState(bundles);
   const [filterPackages, setFilterPackages] = useState([]);
   const router = useRouter();
 
   useEffect(() => {
     if (packageType === "Daily") {
-      const packs = packages.filter((pack) => pack?.duration === 1);
+      const packs = packages?.filter((pack) => pack?.duration === 1);
       setFilterPackages(packs);
     } else if (packageType === "Weekly") {
-      const packs = packages.filter((pack) => pack?.duration === 7);
+      const packs = packages?.filter((pack) => pack?.duration === 7);
       setFilterPackages(packs);
     } else if (packageType === "Monthly") {
-      const packs = packages.filter((pack) => pack?.duration === 30);
+      const packs = packages?.filter((pack) => pack?.duration === 30);
       setFilterPackages(packs);
     } else if (packageType === "Unlimited") {
-      const packs = packages.filter((pack) => pack?.dataAmount < 0);
+      const packs = packages?.filter((pack) => pack?.dataAmount < 0);
       setFilterPackages(packs);
     } else if (packageType === "All") {
       setFilterPackages([]);
     } else {
       const filterType = Number(packageType.split(" ")[0]);
-      const packs = packages.filter((pack) => pack?.duration === filterType);
+      const packs = packages?.filter((pack) => pack?.duration === filterType);
       setFilterPackages(packs);
     }
   }, [packageType, packages]);
 
   useEffect(() => {
     if (countries && router?.query?.country) {
-      const currentCountry = countries.find(
+      const currentCountry = countries?.find(
         (cnt) =>
           cnt?.name?.toLowerCase() === router?.query?.country?.toLowerCase()
       );
       if (currentCountry) {
         setSingleCountry(currentCountry);
-        handleFetchBundles(currentCountry?.iso);
       } else {
         setSingleCountry({});
       }
     }
   }, [router, countries]);
+
+  useEffect(() => {
+    if (bundles?.length > 0) {
+      setPackages(bundles);
+    } else {
+      handleFetchBundles(countryCode);
+    }
+  }, [bundles, countryCode]);
 
   const handleFetchBundles = async (countryCode) => {
     try {
@@ -103,10 +110,10 @@ const PackageList = () => {
               </h5>
             ) : (
               <div className="grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 my-10 pb-10">
-                {filterPackages.length > 0
+                {filterPackages?.length > 0
                   ? filterPackages?.map((pkg) => (
                       <PackageCard
-                        key={pkg.id}
+                        key={pkg?.id}
                         pack={pkg}
                         packageType={packageType}
                         country={singleCountry}
@@ -114,7 +121,7 @@ const PackageList = () => {
                     ))
                   : packages?.map((pkg) => (
                       <PackageCard
-                        key={pkg.id}
+                        key={pkg?.id}
                         pack={pkg}
                         packageType={packageType}
                         country={singleCountry}

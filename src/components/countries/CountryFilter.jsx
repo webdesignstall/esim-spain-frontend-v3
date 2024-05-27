@@ -16,6 +16,7 @@ const CountryFilter = ({ selectedLetters, setSelectedLetters }) => {
       <div className="text-white flex lg:gap-5 flex-wrap justify-center mt-5 lg:px-10">
         {filterables.map((filter) => (
           <button
+            key={Math.random()}
             onClick={() => setSelectedLetters(filter)}
             className={`text-sm border font-medium px-4 py-1 rounded-full ${
               selectedLetters === filter

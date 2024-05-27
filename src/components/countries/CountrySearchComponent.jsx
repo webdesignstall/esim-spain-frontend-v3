@@ -18,7 +18,9 @@ const CountrySearchComponent = () => {
   };
 
   const handleSelectCountry = (country) => {
-    router.push(`/packages/${country?.name?.toLowerCase()}`);
+    router.push(
+      `/packages/${country?.iso}?country=${country?.name?.toLowerCase()}`
+    );
     setShowDropDown(false);
     setSearchValue("");
     inputRef.current.value = "";

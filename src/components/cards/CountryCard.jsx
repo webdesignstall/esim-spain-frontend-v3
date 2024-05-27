@@ -15,7 +15,11 @@ const CountryCard = ({ country }) => {
         <h4 className="lg:text-2xl text-white mb-1">{country?.name}</h4>
         <h6 className="lg:text-xl text-[#FFFFFF]">Starts at $3.5</h6>
       </div>
-      <Link href={`/packages/${country?.name?.toLowerCase()}`}>
+      <Link
+        href={`/packages/${
+          country?.iso
+        }?country=${country?.name?.toLowerCase()}`}
+      >
         <button className="bg-[#FFFFFF69] group-hover:bg-white p-2 rounded-full">
           <FaChevronRight />
         </button>
