@@ -4,6 +4,7 @@ import SimpleSteps from "@/components/home/SimpleSteps";
 import Testimonials from "@/components/home/Testimonials";
 import HomePageLayout from "@/components/layouts/HomePageLayout";
 import MetaDataApi from "../apis/meta-data/MetaDataApi";
+import { popularCountryCodes } from "../constants/popularCountryList";
 
 export default function Home({ countries }) {
   return (
@@ -24,7 +25,17 @@ export async function getServerSideProps() {
   try {
     const data = await MetaDataApi.listCountry();
     const countryList = data?.data?.data ?? [];
-    return { props: { countries: countryList } };
+    const popularCountries = countryList?.filter((country) =>
+      popularCountryCodes?.includes(country?.iso)
+    );
+    const commonCountries = countryList?.filter(
+      (country) => !popularCountryCodes?.includes(country?.iso)
+    );
+    return {
+      props: {
+        countries: popularCountries?.concat(commonCountries?.slice(0, 4)),
+      },
+    };
   } catch (error) {
     console.log(error);
     return { props: { countries: [] } };

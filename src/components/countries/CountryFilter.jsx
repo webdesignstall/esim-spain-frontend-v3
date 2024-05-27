@@ -2,9 +2,21 @@ import React from "react";
 import CountrySearchComponent from "./CountrySearchComponent";
 import { filterables } from "../../constants/countryFilter";
 
-const CountryFilter = ({ selectedLetters, setSelectedLetters }) => {
+const CountryFilter = ({
+  selectedLetters,
+  setSelectedLetters,
+  setFilteredCountries,
+}) => {
+  const handleFilterCountry = (filter) => {
+    if (selectedLetters === filter) {
+      setSelectedLetters("");
+      setFilteredCountries(() => []);
+    } else {
+      setSelectedLetters(filter);
+    }
+  };
   return (
-    <div className="py-10 mb-20">
+    <div className="py-10 mb-10">
       <h5 className="lg:text-2xl  mb-5 font-normal text-center text-[#D2D2D2]">
         Find and buy the best prepaid eSIMs online for your travels.
         <br className="lg:block hidden" /> Connect to the internet in minutes in
@@ -17,7 +29,7 @@ const CountryFilter = ({ selectedLetters, setSelectedLetters }) => {
         {filterables.map((filter) => (
           <button
             key={Math.random()}
-            onClick={() => setSelectedLetters(filter)}
+            onClick={() => handleFilterCountry(filter)}
             className={`text-sm border font-medium px-4 py-1 rounded-full ${
               selectedLetters === filter
                 ? "border-[#C09D5E]"

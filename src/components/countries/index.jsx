@@ -3,7 +3,7 @@ import CountryContainer from "../containers/CountryContainer";
 import CountryFilter from "./CountryFilter";
 import { letters } from "../../constants/countryFilter";
 
-const CountryList = ({ countries }) => {
+const CountryList = ({ popularCountries, allCountries }) => {
   const [selectedLetters, setSelectedLetters] = useState("");
   const [filteredCountries, setFilteredCountries] = useState([]);
 
@@ -13,7 +13,7 @@ const CountryList = ({ countries }) => {
       const startIndex = letters.indexOf(start);
       const endIndex = letters.indexOf(end);
       const filterableLetters = letters?.slice(startIndex, endIndex + 1);
-      const filterCountries = countries?.filter((country) =>
+      const filterCountries = allCountries?.filter((country) =>
         filterableLetters.includes(country?.name?.split("")[0])
       );
       setFilteredCountries(() => filterCountries);
@@ -31,11 +31,33 @@ const CountryList = ({ countries }) => {
       <CountryFilter
         selectedLetters={selectedLetters}
         setSelectedLetters={setSelectedLetters}
+        setFilteredCountries={setFilteredCountries}
       />
+      {!filteredCountries?.length > 0 && (
+        <>
+          <h2 className="lg:text-5xl text-3xl lg:leading-[60px] font-medium text-white mb-24">
+            Popular Countries
+          </h2>
+          <CountryContainer countries={popularCountries} />
+        </>
+      )}
+
+      <h2 className="lg:text-5xl text-3xl lg:leading-[60px] font-medium text-white mb-24">
+        All Countries
+      </h2>
       <CountryContainer
-        countries={countries}
+        countries={allCountries}
         filteredCountries={filteredCountries}
       />
+
+      {filteredCountries?.length > 0 && (
+        <>
+          <h2 className="lg:text-5xl text-3xl lg:leading-[60px] font-medium text-white mb-24">
+            Popular Countries
+          </h2>
+          <CountryContainer countries={popularCountries} />
+        </>
+      )}
     </div>
   );
 };

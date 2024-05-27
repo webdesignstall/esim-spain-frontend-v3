@@ -4,12 +4,16 @@ import SimpleSteps from "@/components/home/SimpleSteps";
 import Testimonials from "@/components/home/Testimonials";
 import CountriesLayout from "@/components/layouts/CountriesLayout";
 import MetaDataApi from "../../apis/meta-data/MetaDataApi";
+import { popularCountryCodes } from "../../constants/popularCountryList";
 
-const Countries = ({ countries }) => {
+const Countries = ({ popularCountries, allCountries }) => {
   return (
     <div>
       <div className="bg-[#0A0601]">
-        <CountryList countries={countries} />
+        <CountryList
+          popularCountries={popularCountries}
+          allCountries={allCountries}
+        />
         <ChoosePirateSim />
         <SimpleSteps />
         <Testimonials />
@@ -28,7 +32,10 @@ export async function getServerSideProps() {
   try {
     const data = await MetaDataApi.listCountry();
     const countryList = data?.data?.data ?? [];
-    return { props: { countries: countryList } };
+    const popularCountries = countryList?.filter((country) =>
+      popularCountryCodes?.includes(country?.iso)
+    );
+    return { props: { popularCountries, allCountries: countryList } };
   } catch (error) {
     console.log(error);
     return { props: { countries: [] } };
