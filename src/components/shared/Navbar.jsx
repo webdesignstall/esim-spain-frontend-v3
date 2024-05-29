@@ -6,6 +6,7 @@ import Image from "next/image";
 import { FaUser, FaAngleDown } from "react-icons/fa";
 import { LiaFlagUsaSolid } from "react-icons/lia";
 import { useCurrency } from "../../contexts/CurrencyProvider";
+import { useAuthProfile } from "../../store/auth/authHook";
 
 const items = [
   {
@@ -40,6 +41,8 @@ const Navbar = () => {
   const [dropdown, setDropdown] = useState(false);
   const [showMenuItem, setShowMenuItem] = useState(false);
   const { setCurrency } = useCurrency();
+  const user = useAuthProfile();
+  console.log({ user });
 
   const handleSelectCountry = (country) => {
     setCurrency(country.label);
@@ -107,12 +110,20 @@ const Navbar = () => {
         </div>
 
         <div className="lg:block hidden">
-          <Link href={"/signin"}>
-            <button className="bg-[#C09D5E] rounded-full font-medium px-6 py-3 flex gap-2 items-center">
-              <FaUser />
-              <span>login/Register</span>
-            </button>
-          </Link>
+          {user?.avatar ? (
+            <Link href={"/profile"}>
+              <button className="bg-[#C09D5E] rounded-full font-medium px-6 py-3 flex gap-2 items-center">
+                <FaUser />
+              </button>
+            </Link>
+          ) : (
+            <Link href={"/signin"}>
+              <button className="bg-[#C09D5E] rounded-full font-medium px-6 py-3 flex gap-2 items-center">
+                <FaUser />
+                <span>login/Register</span>
+              </button>
+            </Link>
+          )}
         </div>
       </div>
 
