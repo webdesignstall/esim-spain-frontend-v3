@@ -12,12 +12,6 @@ const DATA_ERROR = 400;
 
 export const AuthMiddleware = new ApolloLink((operation, forward) => {
   try {
-    const authState = store.getState().auth;
-
-    console.log(
-      "🚀 >>>>>> file: Interceptor.ts:18 >>>>>> AuthMiddleware >>>>>> authState:",
-      authState
-    );
     const accessToken = (store.getState().auth as any)?.accessToken;
     operation.setContext(({ headers = {} }) => ({
       headers: {
