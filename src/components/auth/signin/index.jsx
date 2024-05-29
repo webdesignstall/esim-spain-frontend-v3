@@ -4,11 +4,15 @@ import { BsThreeDots } from "react-icons/bs";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import signUpImage from "../../../assets/images/signupBgImage.png";
+import signUpImage from "../../../assets/images/signinBgImage.png";
 import logo from "../../../assets/pirateLogo.svg";
 import GoogleSignIn from "../socials/GoogleSignIn";
 import FacebookSignIn from "../socials/FacebookSignIn";
 import styles from "./signin.module.css";
+import AuthApi from "../../../apis/auth/AuthApi";
+import { useDispatch } from "react-redux";
+import { signInAction } from "../../../store/auth/authActions";
+import { useRouter } from "next/router";
 
 const SignInPage = () => {
   const [toggle, setToggle] = useState(false);
@@ -17,9 +21,16 @@ const SignInPage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const dispatch = useDispatch();
+  const router = useRouter();
 
-  const handleSignIn = (data) => {
-    console.log("Sign in Data:", data);
+  const handleSignIn = async (data) => {
+    const res = await AuthApi.login(data);
+    const { accessToken, profile, isRegistered } = res?.data?.data ?? {};
+    if (isRegistered && accessToken && profile) {
+      dispatch(signInAction({ profile, accessToken }));
+      router.push("/profile");
+    }
   };
 
   return (
@@ -151,11 +162,7 @@ const SignInPage = () => {
                 </div>
               </div>
               <div className="flex gap-5 mt-5 items-center">
-                <input
-                  type="checkbox"
-                  {...register("remember")}
-                  className="text-white"
-                />
+                <input type="checkbox" className="text-white" />
                 <label className="text-white" htmlFor="remember">
                   Remember me
                   <Link

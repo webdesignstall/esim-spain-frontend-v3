@@ -9,17 +9,26 @@ import logo from "../../../assets/pirateLogo.svg";
 import GoogleSignIn from "../socials/GoogleSignIn";
 import FacebookSignIn from "../socials/FacebookSignIn";
 import styles from "./signup.module.css";
+import AuthApi from "../../../apis/auth/AuthApi";
+import { useRouter } from "next/router";
 
 const SignUpPage = () => {
   const [toggle, setToggle] = useState(false);
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
+  const router = useRouter();
 
-  const handleSignUp = (data) => {
+  const handleSignUp = async (data) => {
     console.log("Sign Up Data:", data);
+    const res = await AuthApi.register({ ...data, title: "Mr" });
+    if (res?.data?.data?.profile?.id) {
+      router.push("/signin");
+      reset();
+    }
   };
 
   return (
@@ -89,44 +98,44 @@ const SignUpPage = () => {
                 <div className="flex flex-col w-full">
                   <label
                     className="text-white text-md font-normal mb-3"
-                    htmlFor="name"
+                    htmlFor="firstName"
                   >
-                    Name
+                    First Name
                   </label>
                   <input
                     className={`bg-transparent outline-none text-white  text-lg px-5 py-3 rounded-3xl border ${
-                      errors.name ? "border-red-500" : "border"
+                      errors.firstName ? "border-red-500" : "border"
                     }`}
-                    type="name"
-                    {...register("name")}
+                    type="text"
+                    {...register("firstName")}
                     placeholder="Mostofa"
                   />
-                  {errors.name && (
+                  {errors.firstName && (
                     <p className="text-red-500 mt-2 text-sm">
-                      {errors.name.message}
+                      {errors.firstName.message}
                     </p>
                   )}
                 </div>
                 <div className="flex flex-col w-full ">
                   <label
                     className="text-white text-md font-normal mb-3"
-                    htmlFor="username"
+                    htmlFor="lastName"
                   >
-                    User Name
+                    Last Name
                   </label>
                   <div className="relative w-full">
                     <input
                       className={`bg-transparent outline-none text-white text-lg px-5 w-full py-3 rounded-3xl border ${
-                        errors.username ? "border-red-500" : "border"
+                        errors.lastName ? "border-red-500" : "border"
                       }`}
                       type="text"
-                      {...register("username")}
+                      {...register("lastName")}
                       placeholder="mostofa123"
                     />
                   </div>
-                  {errors.username && (
+                  {errors.lastName && (
                     <p className="text-red-500 mt-2 text-sm">
-                      {errors.username.message}
+                      {errors.lastName.message}
                     </p>
                   )}
                 </div>
@@ -197,11 +206,7 @@ const SignUpPage = () => {
                 </div>
               </div>
               <div className="flex gap-5 mt-5 items-center">
-                <input
-                  type="checkbox"
-                  {...register("termsAndCondition")}
-                  className="text-white"
-                />
+                <input type="checkbox" className="text-white" />
                 <label className="text-white" htmlFor="remember">
                   I accept the
                   <Link

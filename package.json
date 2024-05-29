@@ -13,9 +13,11 @@
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@mui/lab": "^5.0.0-alpha.170",
+    "@paypal/react-paypal-js": "^8.3.0",
     "@reduxjs/toolkit": "^2.2.5",
     "@types/apollo-upload-client": "^18.0.0",
     "antd": "^5.17.3",
+    "aos": "^2.3.4",
     "apollo-upload-client": "^18.0.1",
     "axios": "^1.6.8",
     "d-react-components": "^0.3.78",
@@ -35,6 +37,7 @@
     "typescript": "^5.4.5"
   },
   "devDependencies": {
+    "@types/aos": "^3.0.7",
     "@types/lodash": "^4.17.4",
     "@types/node": "20.12.12",
     "autoprefixer": "^10.4.19",
