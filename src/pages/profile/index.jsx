@@ -1,6 +1,14 @@
-import ProfileLayout from "../../components/layouts/ProfileLayout";
-import ProfilePage from "../../components/profile";
+import dynamic from "next/dynamic";
 
+const ProfileLayout = dynamic(
+  import("../../components/layouts/ProfileLayout"),
+  {
+    ssr: false,
+  }
+);
+const ProfilePage = dynamic(import("../../components/profile"), {
+  ssr: false,
+});
 const Profile = () => {
   return (
     <div>

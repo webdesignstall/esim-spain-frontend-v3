@@ -1,5 +1,10 @@
-import SignUpPage from "@/components/auth/signup";
-import AuthLayout from "../../components/layouts/AuthLayout";
+import dynamic from "next/dynamic";
+const AuthLayout = dynamic(import("@/components/layouts/AuthLayout"), {
+  ssr: false,
+});
+const SignUpPage = dynamic(import("@/components/auth/signup"), {
+  ssr: false,
+});
 
 const SignUp = () => {
   return (
