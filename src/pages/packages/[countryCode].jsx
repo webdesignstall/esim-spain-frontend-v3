@@ -25,21 +25,21 @@ Packages.getLayout = function getLayout(page) {
   return <PackageLayout>{page}</PackageLayout>;
 };
 
-export async function getStaticPaths() {
-  const data = await MetaDataApi.listCountry();
-  const countryList = data?.data?.data ?? [];
-  const paths = countryList.map((country) => {
-    const path = { params: { countryCode: country?.iso?.toString() } };
-    return path;
-  });
+// export async function getStaticPaths() {
+//   const data = await MetaDataApi.listCountry();
+//   const countryList = data?.data?.data ?? [];
+//   const paths = countryList.map((country) => {
+//     const path = { params: { countryCode: country?.iso?.toString() } };
+//     return path;
+//   });
 
-  return {
-    paths,
-    fallback: true,
-  };
-}
+//   return {
+//     paths,
+//     fallback: true,
+//   };
+// }
 
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
   const { countryCode } = params;
   try {
     const res = await BundleApi.listBundleFromCountry(countryCode);
