@@ -37,10 +37,10 @@ const ProfilePage = () => {
               </div>
             </div>
             <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3 ">
-              <Link href={"/order-history"}>
+              <Link className="w-full" href={"/order-history"}>
                 <Button
                   type="default"
-                  className="flex justify-between items-center bg-[#454545] border-0  text-white text-2xl rounded-2xl py-8 "
+                  className="w-full flex justify-between items-center bg-[#454545] border-0  text-white text-2xl rounded-2xl py-8 "
                 >
                   <div className="flex items-center gap-3">
                     <FaHistory />
@@ -49,10 +49,10 @@ const ProfilePage = () => {
                   <IoIosArrowForward />
                 </Button>
               </Link>
-              <Link href={"/settings"}>
+              <Link className="w-full" href={"/settings"}>
                 <Button
                   type="default"
-                  className="flex justify-between items-center bg-[#454545] border-0 text-white text-2xl rounded-2xl py-8"
+                  className="w-full flex justify-between items-center bg-[#454545] border-0 text-white text-2xl rounded-2xl py-8"
                 >
                   <div className="flex items-center gap-3">
                     <IoSettingsOutline />
