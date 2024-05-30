@@ -4,7 +4,6 @@ import Testimonials from "@/components/home/Testimonials";
 import PackageLayout from "@/components/layouts/PackageLayout";
 import PackageList from "@/components/packages";
 import BundleApi from "../../apis/bundle/BundleApi";
-import MetaDataApi from "../../apis/meta-data/MetaDataApi";
 
 const Packages = ({ bundles, countryCode }) => {
   return (
@@ -24,20 +23,6 @@ export default Packages;
 Packages.getLayout = function getLayout(page) {
   return <PackageLayout>{page}</PackageLayout>;
 };
-
-// export async function getStaticPaths() {
-//   const data = await MetaDataApi.listCountry();
-//   const countryList = data?.data?.data ?? [];
-//   const paths = countryList.map((country) => {
-//     const path = { params: { countryCode: country?.iso?.toString() } };
-//     return path;
-//   });
-
-//   return {
-//     paths,
-//     fallback: true,
-//   };
-// }
 
 export async function getServerSideProps({ params }) {
   const { countryCode } = params;

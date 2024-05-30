@@ -1,7 +1,12 @@
 import ProfileLayout from "../../components/layouts/ProfileLayout";
+import ProfilePage from "../../components/profile";
 
 const Profile = () => {
-  return <div className="my-20">This is profile page</div>;
+  return (
+    <div>
+      <ProfilePage />
+    </div>
+  );
 };
 
 export default Profile;

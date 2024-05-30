@@ -3,7 +3,7 @@ import Footer from "../shared/Footer";
 import Navbar from "../shared/Navbar";
 import bannerBgImage from "../../assets/images/bannerBgImageRectangle.png";
 
-const ProfileLayout = ({ children }) => {
+const OrderHistoryLayout = ({ children }) => {
   return (
     <div className="max-w-[1920px] w-full mx-auto bg-black">
       <div className="relative lg:h-[800px] h-[400px]">
@@ -22,4 +22,4 @@ const ProfileLayout = ({ children }) => {
   );
 };
 
-export default ProfileLayout;
+export default OrderHistoryLayout;
