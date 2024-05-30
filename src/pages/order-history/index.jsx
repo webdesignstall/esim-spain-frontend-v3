@@ -1,5 +1,11 @@
-import OrderHistoryLayout from "../../components/layouts/OrderHistoryLayout";
-import OrderHistoryPage from "../../components/order-history";
+import dynamic from "next/dynamic";
+const OrderHistoryLayout = dynamic(
+  import("../../components/layouts/OrderHistoryLayout"),
+  { ssr: false }
+);
+const OrderHistoryPage = dynamic(import("../../components/order-history"), {
+  ssr: false,
+});
 
 const OrderHistory = () => {
   return (
@@ -9,7 +15,7 @@ const OrderHistory = () => {
   );
 };
 
-export default Profile;
+export default OrderHistory;
 
 OrderHistory.getLayout = function (page) {
   return <OrderHistoryLayout>{page}</OrderHistoryLayout>;
