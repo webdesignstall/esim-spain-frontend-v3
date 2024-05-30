@@ -31,7 +31,6 @@ const initialOptions = {
 };
 
 function App({ Component, pageProps }) {
-  const Layout = Component.Layout;
   const [metaData, setMetaData] = useState([]);
   const [userCart, setUserCart] = useState({});
   const [activeOrder, setActiveOrder] = useState({});
@@ -77,7 +76,7 @@ function App({ Component, pageProps }) {
   }, [userCart]);
 
   const renderMainContent = () => {
-    const getLayout = Component.getLayout;
+    const getLayout = Component?.getLayout || null;
 
     const content = (
       <Fragment>
@@ -94,10 +93,7 @@ function App({ Component, pageProps }) {
       return getLayout(content);
     }
 
-    return (
-      //@ts-ignore
-      <Layout>{content}</Layout>
-    );
+    return content;
   };
 
   return (

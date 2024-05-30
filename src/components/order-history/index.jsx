@@ -1,4 +1,5 @@
-import Sidebar from "./Sidebar";
+import dynamic from "next/dynamic";
+const Sidebar = dynamic(import("./Sidebar"), { ssr: false });
 
 const OrderHistoryPage = () => {
   return (
