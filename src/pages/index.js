@@ -21,7 +21,7 @@ Home.getLayout = function getLayout(page) {
   return <HomePageLayout>{page}</HomePageLayout>;
 };
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   try {
     const data = await MetaDataApi.listCountry();
     const countryList = data?.data?.data ?? [];

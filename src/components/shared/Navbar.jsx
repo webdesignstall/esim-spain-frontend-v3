@@ -42,7 +42,6 @@ const Navbar = () => {
   const [showMenuItem, setShowMenuItem] = useState(false);
   const { setCurrency } = useCurrency();
   const user = useAuthProfile();
-  console.log({ user });
 
   const handleSelectCountry = (country) => {
     setCurrency(country.label);
